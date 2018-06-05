@@ -3,5 +3,5 @@
   "demo_url": "<%= demoUrl %>",
   "title": "<%= appName %>",
   "github": "<%= github %>",
-  "demo_snippet": "<%= snippet %>"
+  "demo_snippet": "{{__snippet__}}"
 }
