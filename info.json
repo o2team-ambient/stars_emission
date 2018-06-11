@@ -1,7 +1,7 @@
 {
-  "author": "<%= author %>",
-  "demo_url": "<%= demoUrl %>",
-  "title": "<%= appName %>",
-  "github": "<%= github %>",
-  "demo_snippet": "{{__snippet__}}"
+  "author": "yvonnexchen",
+  "demo_url": "http://jdc.jd.com/demo/ambient_ambient-cli",
+  "title": "ambient-cli",
+  "github": "https://github.com/o2team-ambient/ambient-cli",
+  "demo_snippet": "<script src=\"http://storage.jd.com/ambient/bundle-ambient-cli.js\"></script><link href=\"http://storage.jd.com/ambient/styles-ambient-cli.css\" ref=\"stylesheet\"></link>"
 }
