@@ -4,7 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const PWD = process.env.PWD || process.cwd()
 
-module.exports = {
+let conf = {
   entry: [PWD + "/demo/src/index.js"],
   output: {
     path: PWD + "/demo/dist",
@@ -38,25 +38,7 @@ module.exports = {
           limit: 2000,
           name: '[path][name].[ext]'
         }
-      },
-      {
-        test: /\.scss|\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: {minimize: true} },
-            'sass-loader', 
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: loader => [
-                  require('autoprefixer')()
-                ]  
-              }
-            }
-          ]
-        })
-      },
+      }
     ],
   },
   plugins: [
@@ -65,4 +47,37 @@ module.exports = {
       template: './demo/src/index.html',
     })  
   ]
+}
+
+module.exports = function (merge) {
+  if (process.env.NODE_ENV === 'development') {
+    conf.module.rules.push({
+      test: /\.scss|\.css$/,
+      use: [
+        {loader: 'style-loader'},
+        {loader: 'css-loader'},
+        {loader: 'sass-loader'}
+      ]
+    })
+  } else {
+    conf.module.rules.push({
+      test: /\.scss|\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [
+          { loader: 'css-loader', options: {minimize: true} },
+          'sass-loader', 
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: loader => [
+                require('autoprefixer')()
+              ]  
+            }
+          }
+        ]
+      })
+    })
+  }
+  return conf
 }
