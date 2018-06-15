@@ -4,9 +4,13 @@ import {
   O2_AMBIENT_INIT,
   O2_AMBIENT_MAIN
 } from './utils/const'
+import StartsEmmision from './components/start_emmision'
 
 function initAmbient () {
-  // new XXX()
+  const opts = window[O2_AMBIENT_CONFIG]
+  const startsEmmision = new StartsEmmision(opts)
+  window[O2_AMBIENT_MAIN] = startsEmmision
+  return startsEmmision
 }
 
 window[O2_AMBIENT_INIT] = initAmbient

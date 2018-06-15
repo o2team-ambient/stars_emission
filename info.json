@@ -1,7 +1,7 @@
 {
-  "author": "<%= author %>",
-  "demo_url": "<%= demoUrl %>",
-  "title": "<%= appName %>",
-  "github": "<%= github %>",
-  "demo_snippet": "{{__snippet__}}"
+  "author": "liangwei",
+  "demo_url": "http://jdc.jd.com/demo/ambient_stars_emmision",
+  "title": "starts_emmision",
+  "github": "https://github.com/o2team-ambient/stars_emmision",
+  "demo_snippet": "<script src=\"http://storage.jd.com/ambient/bundle-starts_emmision.js\"></script><link href=\"http://storage.jd.com/ambient/styles-starts_emmision.css\" ref=\"stylesheet\"></link>"
 }
