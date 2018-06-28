@@ -5,10 +5,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const PWD = process.env.PWD || process.cwd()
 
 let conf = {
-  entry: [PWD + "/demo/src/index.js"],
+  entry: {
+    config: [PWD + "/demo/src/config.js"],
+    control: [PWD + "/demo/src/control.js"],
+    bundle: [PWD + "/demo/src/index.js"]  
+  },
   output: {
     path: PWD + "/demo/dist",
-    filename: "bundle.js"
+    filename: "[name].js"
   },
   // devtool: 'eval-source-map',
   devServer: {
@@ -45,6 +49,7 @@ let conf = {
     new HtmlWebPackPlugin({
       filename: 'index.html',
       template: './demo/src/index.html',
+      hash: true
     })  
   ]
 }

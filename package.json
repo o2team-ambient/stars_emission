@@ -1,0 +1,45 @@
+{
+  "name": "ambient-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "init": "gulp init --silent",
+    "start": "gulp start --silent",
+    "build": "gulp build --silent",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "chenxinyi",
+  "license": "ISC",
+  "dependencies": {
+    "@o2team/ambient-dat.gui": "^0.7.1"
+  },
+  "devDependencies": {
+    "jfs-sdk-node": "file:plugins/jfs-sdk-node-0.1.0.tar.gz",
+    "autoprefixer": "^8.6.2",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "chalk": "^2.4.1",
+    "css-loader": "^0.28.11",
+    "download-git-repo": "^1.0.2",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
+    "fs-extra": "4.0.1",
+    "git-clone": "^0.1.0",
+    "gulp": "^3.9.1",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "inquirer": "^6.0.0",
+    "mem-fs": "1.1.3",
+    "mem-fs-editor": "3.0.2",
+    "node-sass": "^4.9.0",
+    "ora": "^2.1.0",
+    "postcss-loader": "^2.1.5",
+    "sass-loader": "^7.0.2",
+    "style-loader": "^0.20.3",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "url-loader": "^1.0.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "2.11.1"
+  }
+}

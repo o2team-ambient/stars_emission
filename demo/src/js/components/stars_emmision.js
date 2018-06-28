@@ -1,4 +1,4 @@
-import p5 from 'p5'
+// import p5 from 'p5'
 import { getRandom } from '../utils/util'
 
 class StartsEmmision {
@@ -39,6 +39,9 @@ class StartsEmmision {
     for (var i = 0; i < options.Points; i++) {
       this.stars[i] = new Star(width, height, options, p)
     }
+    myCanvas.canvas.addEventListener('click', () => {
+      myCanvas.canvas.style.display = 'none'
+    })
   }
 
   draw (p) {

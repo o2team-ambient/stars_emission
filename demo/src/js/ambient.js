@@ -4,7 +4,7 @@ import {
   O2_AMBIENT_INIT,
   O2_AMBIENT_MAIN
 } from './utils/const'
-import StartsEmmision from './components/start_emmision'
+import StartsEmmision from './components/stars_emmision'
 
 function initAmbient () {
   const opts = window[O2_AMBIENT_CONFIG]
@@ -16,7 +16,11 @@ function initAmbient () {
 window[O2_AMBIENT_INIT] = initAmbient
 
 try {
-  initAmbient()
+  let csi = setInterval(() => {
+    if (!window[O2_AMBIENT_CONFIG]) return
+    clearInterval(csi)
+    initAmbient()
+  }, 1000)
 } catch (e) {
   console.log(e) 
 }
