@@ -3,6 +3,6 @@ node_modules/
 .cache/
 .DS_Store
 .gitignore
-./demo/dist/
-./plugins
+demo/dist/
+plugins/
 package-lock.json
