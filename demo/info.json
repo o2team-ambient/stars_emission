@@ -1,9 +1,8 @@
 {
   "author": "liangwei",
-  "demo_url": "http://jdc.jd.com/demo/ambient_stars_emmision",
+  "demoUrl": "http://jdc.jd.com/demo/ambient_stars_emmision",
   "title": "starts_emmision",
   "github": "https://github.com/o2team-ambient/stars_emmision",
-  "demo_snippet": "<script src=\"http://storage.jd.com/ambient/bundle-starts_emmision.js\"></script><link href=\"http://storage.jd.com/ambient/styles-starts_emmision.css\" ref=\"stylesheet\"></link>",
   "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-starts_emmision.css?t=1530192203000\" rel=\"stylesheet\" /><!-- S 主体内容 -->\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js\"></script>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-starts_emmision.js?t=1530192203000\"></script>",
   "controlUrl": "//storage.jd.com/ambient/control-starts_emmision.js?t=1530192203000",
   "configUrl": "//storage.jd.com/ambient/config-starts_emmision.js?t=1530192203000"
