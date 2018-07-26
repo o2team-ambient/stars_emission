@@ -1,4 +1,4 @@
-// import p5 from 'p5'
+import p5 from 'p5'
 import { getRandom } from '../utils/util'
 
 class StartsEmmision {
@@ -6,11 +6,16 @@ class StartsEmmision {
     this.options = options
     this.stars = []
     let realWidth = document.documentElement.clientWidth
+    let realHeight = document.documentElement.clientHeight
     let canvasWidth = options.Width
+    let canvasHeight = options.Height
     if (realWidth < options.Width) {
       canvasWidth = realWidth
     }
-    let canvasHeight = canvasWidth / 2
+    if (realHeight < options.Height) {
+      canvasHeight = realHeight
+    }
+    console.log(options.height)
     this.width = canvasWidth
     this.height = canvasHeight
     this.sketch = (p) => {
@@ -23,7 +28,20 @@ class StartsEmmision {
   }
 
   init () {
+    const { time } = this.options
+
+    this.p5 && this.p5.remove()
     this.p5 = new p5(this.sketch)
+
+    clearTimeout(this.timer)
+    const numReg = /^[0-9]*$/
+    if (!numReg.test(time)) return
+    const ms = Number(time) * 1000
+    if (ms > 0) {
+      this.timer = setTimeout(() => {
+        this.p5.remove()
+      }, ms)
+    }
   }
 
   update (newOptions) {
@@ -33,15 +51,12 @@ class StartsEmmision {
 
   setup (p) {
     const { width, height, options } = this
-    const myCanvas = p.createCanvas(width, height)
+    this.myCanvas = p.createCanvas(width, height)
     p.background(255, 255, 255, 10)
-    myCanvas.canvas.style = `pointer-events: none; position:fixed; top:0; left:50%; transform: translateX(-50%); width: ${width}px; height: ${height}px; z-index: -1`
+    this.myCanvas.canvas.style = `pointer-events: none; position:fixed; top:0; left:50%; transform: translateX(-50%); width: ${width}px; height: ${height}px; z-index: -1`
     for (var i = 0; i < options.Points; i++) {
       this.stars[i] = new Star(width, height, options, p)
     }
-    myCanvas.canvas.addEventListener('click', () => {
-      myCanvas.canvas.style.display = 'none'
-    })
   }
 
   draw (p) {
@@ -60,9 +75,41 @@ class StartsEmmision {
     }
 
     for (var i = 0; i < options.Points; i++) {
+      if (!this.stars[i]) {
+        continue
+      }
       this.stars[i].display()
       this.stars[i].update()
     }
+  }
+
+  update (newOptions) {
+    this.options = newOptions
+    let realWidth = document.documentElement.clientWidth
+    let realHeight = document.documentElement.clientHeight
+    let canvasWidth = newOptions.Width
+    let canvasHeight = newOptions.Height
+    if (realWidth < newOptions.Width) {
+      canvasWidth = realWidth
+    }
+    if (realHeight < newOptions.Height) {
+      canvasHeight = realHeight
+    }
+    this.width = canvasWidth
+    this.height = canvasHeight
+    this.init()
+  }
+
+  pause () {
+    this.p5.noLoop()
+  }
+
+  replay () {
+    this.p5.loop()
+  }
+
+  destroy () {
+    this.p5.remove()
   }
 }
 

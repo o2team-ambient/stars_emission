@@ -6,6 +6,12 @@ function getRandomInt (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
+function getRandomArr (arr) {
+  const length = arr.length
+  const idx = Math.floor(Math.random() * length)
+  return arr[idx]
+}
+
 function getParameterByName (name, url) {
   if (!url) url = window.location.href
   /* eslint-disable no-useless-escape */
@@ -36,6 +42,7 @@ function radToDeg (rad) {
 export {
   getRandom,
   getRandomInt,
+  getRandomArr,
   getParameterByName,
   getDevicePixelRatio,
   degToRad,

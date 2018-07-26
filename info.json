@@ -3,7 +3,7 @@
   "demoUrl": "http://jdc.jd.com/demo/ambient/stars_emmision",
   "title": "stars_emmision",
   "github": "https://github.com/o2team-ambient/stars_emmision",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1530628040000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js\"></script>\n  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.min.js\"></script>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1530628040000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-stars_emmision.js?t=1530628040000",
-  "configUrl": "//storage.jd.com/ambient/config-stars_emmision.js?t=1530628040000"
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1532592056000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1532592056000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-stars_emmision.js?t=1532592056000",
+  "configUrl": "//storage.jd.com/ambient/config-stars_emmision.js?t=1532592056000"
 }

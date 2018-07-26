@@ -3,8 +3,9 @@
  */
 
 import dat from '@o2team/ambient-dat.gui'
+import { O2_AMBIENT_MAIN } from './utils/const'
 import Controller from './utils/controller'
-import { getParameterByName } from './utils/util'
+import { getParameterByName, getRandom, getRandomArr } from './utils/util'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
@@ -18,11 +19,11 @@ let controlInit = () => {
       this.message = '星星发射器'
       this.play = () => {
         if (this.isPaly) {
-         // window[O2_AMBIENT_MAIN].stopBarrager()
+          window[O2_AMBIENT_MAIN].pause()
           this.isPaly = false
         } else {
           this.isPaly = true
-          // window[O2_AMBIENT_MAIN].palyBarrager()
+          window[O2_AMBIENT_MAIN].replay()
         }
       }
     }
@@ -33,6 +34,7 @@ let controlInit = () => {
     constructor () {
       super()
       this.otherConfig = new OtherConfig()
+      this.controls = {}
       this.initBaseGUI()
       // this.initTextureGUI()
       this.isShowController && !this.isAmbientPlat && this.setBackgroundColor(this.otherConfig.backgroundColor)
@@ -41,70 +43,61 @@ let controlInit = () => {
     initBaseGUI () {
       const config = this.config
       const otherConfig = this.otherConfig
+      config.random = () => {
+        this.randomData()
+      }
       const gui = new dat.GUI()
       gui.add(otherConfig, 'message').name('配置面板')
       gui.add(otherConfig, 'play').name('播放 / 暂停')
-      gui.add(config, 'Width').name('粒子散播宽度').min(0).max(2000).step(1).onFinishChange(val => {
-        console.log(val)
+      gui.add(config, 'Width').name('粒子散播宽度').onFinishChange(val => {
+        window[O2_AMBIENT_MAIN].update(config)
       })
-      gui.addColor(config, 'Color1').name('粒子颜色1').onFinishChange(val => {
-        console.log(val)
+      this.controls['Color1'] = gui.addColor(config, 'Color1').name('粒子颜色1')
+      this.controls['Color2'] = gui.addColor(config, 'Color2').name('粒子颜色2')
+      this.controls['Range'] = gui.add(config, 'Range', 100, 1000).name('渐变色值范围')
+      this.controls['Speed'] = gui.add(config, 'Speed', 10, 40).name('粒子速度')
+      this.controls['Points'] = gui.add(config, 'Points', 100, 1000).step(1).name('粒子数量').onFinishChange(val => {
+        window[O2_AMBIENT_MAIN].update(config)
       })
-      gui.addColor(config, 'Color2').name('粒子颜色2').onFinishChange(val => {
-        console.log(val)
+      this.controls['maxSize'] = gui.add(config, 'maxSize', 0, 20).name('粒子最大尺寸')
+      this.controls['minSize'] = gui.add(config, 'minSize', 0, 5).name('粒子最小尺寸')
+      this.controls['Direction'] = gui.add(config, 'Direction', ['Center', 'Left', 'Right', 'Up', 'Down']).name('渐变方向')
+      gui.add(config, 'time').step(1).name('运行时间（0为无限制）').onFinishChange(val => {
+        window[O2_AMBIENT_MAIN].update(config)
       })
-      gui.add(config, 'Range').name('渐变色值范围').min(0).max(1000).step(1).onFinishChange(val => {
-        console.log(val)
-      })
-      gui.add(config, 'Speed').name('粒子速度').min(0).max(10).step(1).onFinishChange(val => {
-        console.log(val)
-      })
-      gui.add(config, 'Points').name('粒子数量').min(0).max(2000).step(1).onFinishChange(val => {
-        console.log(val)
-      })
-      gui.add(config, 'maxSize').name('粒子最大尺寸').min(5).max(20).step(1).onFinishChange(val => {
-        console.log(val)
-      })
-      gui.add(config, 'minSize').name('粒子最小尺寸').min(0).max(5).step(1).onFinishChange(val => {
-        console.log(val)
-      })
-      gui.add(config, 'Direction', ['Center', 'Left', 'Right', 'Up', 'Down']).name('渐变方向').onFinishChange(val => {
-        console.log(val)
-      })
-      this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
+      gui.add(config, 'random').name('随机配置')
+      gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
       this.gui = gui
       this.setGUIzIndex(2)
     }
-  
-    // initTextureGUI () {
-    //   const gui = this.gui
-    //   const textures = this.config.textures
-    //   const texturesFolder = gui.addFolder('纹理')
-    //   let index = 0
-    //   texturesFolder.open()
-  
-    //   this.texturesFolder = texturesFolder
-    // }
 
     randomData () {
-      this.Color1 = [getRandom(0, 255), getRandom(0, 255), getRandom(0, 255)];
-      this.Color2 = [getRandom(0, 255), getRandom(0, 255), getRandom(0, 255)];
-      this.Speed = getRandom(10, 20);
-      this.Range = getRandom(0, 400);
-      this.Points = getRandom(300, 2000);
-      this.maxSize = getRandom(1, 20);
-      this.minSize = getRandom(1, 5);
-      this.Direction = getRandom(['Center', 'Left', 'Right', 'Up', 'Down']);
-  
+      const { controls } = this
+      const Color1 = [getRandom(0, 255), getRandom(0, 255), getRandom(0, 255)]
+      const Color2 = [getRandom(0, 255), getRandom(0, 255), getRandom(0, 255)]
+      const Speed = getRandom(10, 40)
+      const Range = getRandom(100, 1000)
+      const Points = getRandom(100, 1000)
+      const maxSize = getRandom(0, 20)
+      const minSize = getRandom(0, 5)
+      const Direction = getRandomArr(['Center', 'Left', 'Right', 'Up', 'Down'])
+
       // color1
-      const color1 = this.rgbToHex(Math.floor(this.Color1[0]), Math.floor(this.Color1[1]), Math.floor(this.Color1[2]));
-      color1Control.setValue(color1);
-  
+      const color1 = this.rgbToHex(Math.floor(Color1[0]), Math.floor(Color1[1]), Math.floor(Color1[2]))
+      controls['Color1'].setValue(color1)
+
       //color2
-      const color2 = this.rgbToHex(Math.floor(this.Color2[0]), Math.floor(this.Color2[1]), Math.floor(this.Color2[2]));
-      color2Control.setValue(color2);
+      const color2 = this.rgbToHex(Math.floor(Color2[0]), Math.floor(Color2[1]), Math.floor(Color2[2]))
+      controls['Color2'].setValue(color2)
+
+      controls['Speed'].setValue(Speed)
+      controls['Range'].setValue(Range)
+      controls['Points'].setValue(Points)
+      controls['maxSize'].setValue(maxSize)
+      controls['minSize'].setValue(minSize)
+      controls['Direction'].setValue(Direction)
     }
   
     componentToHex (c) {

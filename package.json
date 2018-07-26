@@ -10,6 +10,7 @@
   "author": "chenxinyi",
   "license": "ISC",
   "dependencies": {
-    "@o2team/ambient-dat.gui": "^0.7.3"
+    "@o2team/ambient-dat.gui": "^0.7.3",
+    "p5": "^0.6.1"
   }
 }
