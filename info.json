@@ -1,6 +1,6 @@
 {
   "author": "liangwei",
-  "demoUrl": "http://jdc.jd.com/demo/ambient/stars_emmision",
+  "demoUrl": "http://jdc.jd.com/demo/ambient/stars_emmision/",
   "title": "stars_emmision",
   "github": "https://github.com/o2team-ambient/stars_emmision",
   "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1532592056000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1532592056000\"></script>",
