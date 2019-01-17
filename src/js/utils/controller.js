@@ -1,12 +1,13 @@
 /**
  * @desc 公用控制面板
+ * 注：通用代码，请勿在不知情的情况下进行修改
  */
 
 import {
   O2_AMBIENT_MAIN,
   O2_AMBIENT_CONFIG,
   O2_AMBIENT_CONFIG_KEY,
-  O2_AMBIENT_INIT
+  O2_AMBIENT_IS_CONFIG_RESET
 } from './const'
 import { getParameterByName } from './util'
 
@@ -14,8 +15,6 @@ import { getParameterByName } from './util'
 const isLoop = getParameterByName('loop') // 是否循环播放
 const isShowController = getParameterByName('controller') // 是否展示控制面板
 const isAmbientPlat = getParameterByName('platform') === '1' // 是否平台环境
-
-window[O2_AMBIENT_CONFIG_KEY] = O2_AMBIENT_CONFIG
 
 class Controller {
   constructor() {
@@ -35,6 +34,9 @@ class Controller {
     if (!this.isShowController && !this.isAmbientPlat) {
       this.setControllerHide()
     }
+
+    if (window[O2_AMBIENT_CONFIG_KEY]) return
+    window[O2_AMBIENT_CONFIG_KEY] = O2_AMBIENT_CONFIG
   }
 
   // 监听 postmessage
@@ -86,12 +88,16 @@ class Controller {
   }
 
   // 重置画布
-  resetCanvas() {
+  resetCanvas(opts) {
     if (this.isAmbientPlat) {
       this.transferProcess()
+
+      if (window[O2_AMBIENT_IS_CONFIG_RESET]) return
+      window[O2_AMBIENT_IS_CONFIG_RESET] = true
+
       return
     }
-    window[O2_AMBIENT_MAIN] && window[O2_AMBIENT_MAIN].reset && typeof window[O2_AMBIENT_MAIN].reset === 'function' && window[O2_AMBIENT_MAIN].reset()
+    window[O2_AMBIENT_MAIN] && window[O2_AMBIENT_MAIN].reset && typeof window[O2_AMBIENT_MAIN].reset === 'function' && window[O2_AMBIENT_MAIN].reset(opts)
   }
 }
 
