@@ -38,7 +38,7 @@ class Control {
     this.otherConfig = new OtherConfig()
     this.initBaseGUI()
     this.initTextureGUI()
-    Control.setBackgroundColor(this.otherConfig.backgroundColor)
+    this.setBackgroundColor(this.otherConfig.backgroundColor)
   }
 
   initBaseGUI () {
@@ -75,7 +75,7 @@ class Control {
       console.log(val)
     })
     gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
-      Control.setBackgroundColor(val)
+      this.setBackgroundColor(val)
     })
     this.gui = gui
     this.setGUIzIndex(2)

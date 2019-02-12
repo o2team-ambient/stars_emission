@@ -15,7 +15,6 @@ class StartsEmmision {
     if (realHeight < options.Height) {
       canvasHeight = realHeight
     }
-    console.log(options.height)
     this.width = canvasWidth
     this.height = canvasHeight
     this.sketch = (p) => {
@@ -52,7 +51,7 @@ class StartsEmmision {
   setup (p) {
     const { width, height, options } = this
     this.myCanvas = p.createCanvas(width, height)
-    p.background(255, 255, 255, 10)
+    // p.background(255, 255, 255, 10)
     this.myCanvas.canvas.style = `pointer-events: none; position:fixed; top:0; left:50%; transform: translateX(-50%); width: ${width}px; height: ${height}px; z-index: -1`
     for (var i = 0; i < options.Points; i++) {
       this.stars[i] = new Star(width, height, options, p)
@@ -60,8 +59,9 @@ class StartsEmmision {
   }
 
   draw (p) {
+    this.myCanvas.drawingContext.clearRect(0, 0, this.width * 2, this.height * 2)
     const { options, width, height } = this
-    p.background(255,255,255, 10)
+    // p.background(255,255,255, 10)
     if (options.Direction == 'Center') {
       p.translate(width / 2, height / 2)
     } else if (options.Direction == 'Right') {

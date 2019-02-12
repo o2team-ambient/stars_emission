@@ -4,7 +4,7 @@
   "title": "stars_emmision",
   "ambName": "放射",
   "github": "https://github.com/o2team-ambient/stars_emmision",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1547713814000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1547713814000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-stars_emmision.js?t=1547713814000",
-  "configUrl": "//storage.jd.com/ambient/config-stars_emmision.js?t=1547713814000"
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1549960148000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1549960148000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-stars_emmision.js?t=1549960148000",
+  "configUrl": "//storage.jd.com/ambient/config-stars_emmision.js?t=1549960148000"
 }
