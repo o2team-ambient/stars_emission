@@ -1,7 +1,7 @@
 {
   "author": "liangwei",
-  "demoUrl": "http://jdc.jd.com/demo/ambient/stars_emmision/",
-  "miniDemoUrl": "http://jdc.jd.com/demo/ambient/stars_emmision/index_demo.html",
+  "demoUrl": "//o2team-ambient.github.io/stars_emmision/dist/",
+  "miniDemoUrl": "//o2team-ambient.github.io/stars_emmision/dist/index_demo.html",
   "title": "stars_emmision",
   "ambName": "放射",
   "github": "https://github.com/o2team-ambient/stars_emmision",
