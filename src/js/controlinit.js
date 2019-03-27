@@ -26,16 +26,25 @@ let controlInit = () => {
           window[O2_AMBIENT_MAIN].replay()
         }
       }
+      this.random = () => {}
     }
   }
 
   // 主控制面板
   class Control extends Controller {
+    colorFolder
+    motionFolder
+    sizeFolder
+
     constructor () {
       super()
       this.otherConfig = new OtherConfig()
       this.controls = {}
       this.initBaseGUI()
+      this.initColorGUI()
+      this.initMotionGUI()
+      this.initSizeGUI()
+      this.initAdvanceGUI()
       // this.initTextureGUI()
       this.isShowController && !this.isAmbientPlat && this.setBackgroundColor(this.otherConfig.backgroundColor)
     }
@@ -43,34 +52,84 @@ let controlInit = () => {
     initBaseGUI () {
       const config = this.config
       const otherConfig = this.otherConfig
-      config.random = () => {
+      otherConfig.random = () => {
         this.randomData()
       }
       const gui = new dat.GUI()
       gui.add(otherConfig, 'message').name('配置面板')
-      gui.add(otherConfig, 'play').name('播放 / 暂停')
-      gui.add(config, 'Width').name('粒子散播宽度').onFinishChange(val => {
-        window[O2_AMBIENT_MAIN].update(config)
-      })
-      this.controls['Color1'] = gui.addColor(config, 'Color1').name('粒子颜色1')
-      this.controls['Color2'] = gui.addColor(config, 'Color2').name('粒子颜色2')
-      this.controls['Range'] = gui.add(config, 'Range', 100, 1000).name('渐变色值范围')
-      this.controls['Speed'] = gui.add(config, 'Speed', 10, 40).name('粒子速度')
-      this.controls['Points'] = gui.add(config, 'Points', 100, 1000).step(1).name('粒子数量').onFinishChange(val => {
-        window[O2_AMBIENT_MAIN].update(config)
-      })
-      this.controls['maxSize'] = gui.add(config, 'maxSize', 0, 20).name('粒子最大尺寸')
-      this.controls['minSize'] = gui.add(config, 'minSize', 0, 5).name('粒子最小尺寸')
-      this.controls['Direction'] = gui.add(config, 'Direction', ['Center', 'Left', 'Right', 'Up', 'Down']).name('渐变方向')
-      gui.add(config, 'time').step(1).name('运行时间（0为无限制）').onFinishChange(val => {
-        window[O2_AMBIENT_MAIN].update(config)
-      })
-      gui.add(config, 'random').name('随机配置')
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
+      gui.add(otherConfig, 'play').name('播放 / 暂停')
+      gui.add(otherConfig, 'random').name('随机配置')
+      
       this.gui = gui
       this.setGUIzIndex(2)
+    }
+
+    initColorGUI () {
+      this.colorFolder = this.gui.addFolder('粒子配色')
+
+      this.controls['Color1'] = this.colorFolder
+        .addColor(this.config, 'Color1')
+        .name('靠近中心')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['Color2'] = this.colorFolder
+        .addColor(this.config, 'Color2')
+        .name('靠近外围')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['Range'] = this.colorFolder
+        .add(this.config, 'Range', 100, 1000)
+        .name('渐变范围')
+        .onChange(this.resetCanvas.bind(this))
+
+      this.colorFolder.open()
+    }
+
+    initMotionGUI () {
+      this.motionFolder = this.gui.addFolder('粒子动态')
+
+      this.controls['Speed'] = this.motionFolder
+        .add(this.config, 'Speed', 10, 40)
+        .name('粒子速度')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['Points'] = this.motionFolder
+        .add(this.config, 'Points', 100, 1000)
+        .step(1)
+        .name('粒子数量')
+        .onChange(this.resetCanvas.bind(this))
+      // this.controls['maxSize'] = this.motionFolder
+      //   .add(this.config, 'maxSize', 0, 20)
+      //   .name('粒子长度')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['minSize'] = this.motionFolder
+        .add(this.config, 'minSize', 0, 5)
+        .name('粒子宽度')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['Direction'] = this.motionFolder
+        .add(this.config, 'Direction', ['中心', '右侧', '左侧', '下方', '上方'])
+        .name('发射中心位置')
+        .onChange(this.resetCanvas.bind(this))
+      this.motionFolder.open()
+    }
+
+    initSizeGUI () {
+      this.sizeFolder = this.gui.addFolder('画布尺寸')
+
+      this.sizeFolder.add(this.config, 'Width')
+        .name('宽度')
+        .onChange(this.resetCanvas.bind(this))
+      this.sizeFolder.add(this.config, 'Height')
+        .name('高度')
+        .onChange(this.resetCanvas.bind(this))
+    }
+
+    initAdvanceGUI () {
+
+      this.gui.add(this.config, 'time')
+        .step(1)
+        .name('运行时间（秒，0为无限制）')
+        .onChange(this.resetCanvas.bind(this))
     }
 
     randomData () {
@@ -82,7 +141,7 @@ let controlInit = () => {
       const Points = getRandom(100, 1000)
       const maxSize = getRandom(0, 20)
       const minSize = getRandom(0, 5)
-      const Direction = getRandomArr(['Center', 'Left', 'Right', 'Up', 'Down'])
+      const Direction = getRandomArr(['中心', '右侧', '左侧', '下方', '上方'])
 
       // color1
       const color1 = this.rgbToHex(Math.floor(Color1[0]), Math.floor(Color1[1]), Math.floor(Color1[2]))
@@ -95,9 +154,11 @@ let controlInit = () => {
       controls['Speed'].setValue(Speed)
       controls['Range'].setValue(Range)
       controls['Points'].setValue(Points)
-      controls['maxSize'].setValue(maxSize)
+      // controls['maxSize'].setValue(maxSize)
       controls['minSize'].setValue(minSize)
       controls['Direction'].setValue(Direction)
+      
+      this.resetCanvas()
     }
   
     componentToHex (c) {

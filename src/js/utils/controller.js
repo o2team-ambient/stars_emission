@@ -88,7 +88,7 @@ class Controller {
   }
 
   // 重置画布
-  resetCanvas(opts) {
+  resetCanvas = () => {
     if (this.isAmbientPlat) {
       this.transferProcess()
 
@@ -97,7 +97,7 @@ class Controller {
 
       return
     }
-    window[O2_AMBIENT_MAIN] && window[O2_AMBIENT_MAIN].reset && typeof window[O2_AMBIENT_MAIN].reset === 'function' && window[O2_AMBIENT_MAIN].reset(opts)
+    window[O2_AMBIENT_MAIN] && window[O2_AMBIENT_MAIN].reset && typeof window[O2_AMBIENT_MAIN].reset === 'function' && window[O2_AMBIENT_MAIN].reset(window[O2_AMBIENT_CONFIG])
   }
 }
 

@@ -3,27 +3,14 @@ import { getRandom } from '../utils/util'
 
 class StartsEmmision {
   constructor (options) {
-    this.options = options
     this.stars = []
-    let realWidth = document.documentElement.clientWidth
-    let realHeight = document.documentElement.clientHeight
-    let canvasWidth = options.Width
-    let canvasHeight = options.Height
-    if (realWidth < options.Width) {
-      canvasWidth = realWidth
-    }
-    if (realHeight < options.Height) {
-      canvasHeight = realHeight
-    }
-    this.width = canvasWidth
-    this.height = canvasHeight
     this.sketch = (p) => {
       p.setup = this.setup.bind(this, p)
       p.draw = this.draw.bind(this, p)
       this.p = p
     }
 
-    this.init()
+    this.reset(options)
   }
 
   init () {
@@ -31,6 +18,7 @@ class StartsEmmision {
 
     this.p5 && this.p5.remove()
     this.p5 = new p5(this.sketch)
+    this.draw(this.p)
 
     clearTimeout(this.timer)
     const numReg = /^[0-9]*$/
@@ -61,16 +49,15 @@ class StartsEmmision {
   draw (p) {
     this.myCanvas.drawingContext.clearRect(0, 0, this.width * 2, this.height * 2)
     const { options, width, height } = this
-    // p.background(255,255,255, 10)
-    if (options.Direction == 'Center') {
+    if (options.Direction == '中心') {
       p.translate(width / 2, height / 2)
-    } else if (options.Direction == 'Right') {
+    } else if (options.Direction == '左侧') {
       p.translate(0, height / 2)
-    } else if (options.Direction == 'Left') {
+    } else if (options.Direction == '右侧') {
       p.translate(width, height / 2)
-    } else if (options.Direction == 'Down') {
+    } else if (options.Direction == '上方') {
       p.translate(width / 2, 0)
-    } else if (options.Direction == 'Up') {
+    } else if (options.Direction == '下方') {
       p.translate(width / 2, height)
     }
 
@@ -83,16 +70,16 @@ class StartsEmmision {
     }
   }
 
-  update (newOptions) {
-    this.options = newOptions
+  reset (newOptions) {
+    this.options = Object.assign({}, newOptions)
     let realWidth = document.documentElement.clientWidth
     let realHeight = document.documentElement.clientHeight
-    let canvasWidth = newOptions.Width
-    let canvasHeight = newOptions.Height
-    if (realWidth < newOptions.Width) {
+    let canvasWidth = parseInt(newOptions.Width, 10)
+    let canvasHeight = parseInt(newOptions.Height, 10)
+    if (realWidth < parseInt(newOptions.Width, 10)) {
       canvasWidth = realWidth
     }
-    if (realHeight < newOptions.Height) {
+    if (realHeight < parseInt(newOptions.Height, 10)) {
       canvasHeight = realHeight
     }
     this.width = canvasWidth

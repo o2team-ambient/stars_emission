@@ -10,5 +10,5 @@ window[O2_AMBIENT_CONFIG] = {
   maxSize: 10,
   minSize: 3,
   time: 0,
-  Direction: 'Center'
+  Direction: '中心'
 }
