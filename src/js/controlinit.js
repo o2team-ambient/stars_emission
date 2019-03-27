@@ -60,7 +60,7 @@ let controlInit = () => {
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         Control.setBackgroundColor(val)
       })
-      gui.add(otherConfig, 'play').name('播放 / 暂停')
+      // gui.add(otherConfig, 'play').name('播放 / 暂停')
       gui.add(otherConfig, 'random').name('随机配置')
       
       this.gui = gui
