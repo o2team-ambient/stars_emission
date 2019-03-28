@@ -7,3 +7,4 @@ dist/*.css
 dist/src/
 plugins/
 package-lock.json
+screenshot/
