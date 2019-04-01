@@ -4,10 +4,6 @@ node_modules/
 .DS_Store
 dist/*.js
 dist/*.css
-<<<<<<< a362b48b783a1e853721ed45607994e05a6df2ab
-dist/src/
-=======
->>>>>>> feat: 更新缩略图
 plugins/
 package-lock.json
 screenshot/
