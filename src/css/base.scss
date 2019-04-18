@@ -1,5 +1,5 @@
 /**
- * 样式重置
+ * 样式重置，将不会被打包进代码包
  */
 * {
   -webkit-tap-highlight-color: transparent;
@@ -59,14 +59,4 @@ body {
 
 input[type="text"], textarea {
   appearance: none;
-}
-
-// 运营活动页面需要
-html {
-  width: 100%;
-  height: 100%;
-}
-
-canvas {
-  pointer-events: none;
 }

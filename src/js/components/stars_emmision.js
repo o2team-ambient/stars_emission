@@ -47,6 +47,7 @@ class StartsEmmision {
   }
 
   draw (p) {
+    if (!this.myCanvas) return
     this.myCanvas.drawingContext.clearRect(0, 0, this.width * 2, this.height * 2)
     const { options, width, height } = this
     if (options.Direction == '中心') {
