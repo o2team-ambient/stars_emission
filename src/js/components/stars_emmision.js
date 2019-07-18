@@ -40,7 +40,7 @@ class StartsEmmision {
     const { width, height, options } = this
     this.myCanvas = p.createCanvas(width, height)
     // p.background(255, 255, 255, 10)
-    this.myCanvas.canvas.style = `pointer-events: none; position:fixed; top:0; left:50%; transform: translateX(-50%); width: ${width}px; height: ${height}px; z-index: -1`
+    this.myCanvas.canvas.style = `pointer-events: none; position:fixed; top:0; left:50%; transform: translateX(-50%); width: ${width}px; height: ${height}px;`
     for (var i = 0; i < options.Points; i++) {
       this.stars[i] = new Star(width, height, options, p)
     }

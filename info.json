@@ -5,9 +5,9 @@
   "title": "stars_emission",
   "ambName": "放射",
   "github": "https://github.com/o2team-ambient/stars_emmision",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emmision.css?t=1552466531000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emmision.js?t=1552466531000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-stars_emmision.js?t=1552466531000",
-  "configUrl": "//storage.jd.com/ambient/config-stars_emmision.js?t=1552466531000",
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-stars_emission.css?t=1563430373000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-stars_emission.js?t=1563430373000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-stars_emission.js?t=1563430373000",
+  "configUrl": "//storage.jd.com/ambient/config-stars_emission.js?t=1563430373000",
   "placeholderImg": "//storage.jd.com/ambient/stars_emmision_placeholder.png?t=1554278221000",
   "gifImg": "//storage.jd.com/ambient/stars_emmision_motion.gif?t=1554086585000",
   "spriteImg": "//storage.jd.com/ambient/stars_emmision_sprite.png?t=1554278221000"
