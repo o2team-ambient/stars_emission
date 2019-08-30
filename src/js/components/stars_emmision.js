@@ -1,5 +1,6 @@
 import p5 from 'p5'
 import { getRandom } from '../utils/util'
+import hexToRgb from '../utils/hexToRgb'
 
 class StartsEmmision {
   constructor (options) {
@@ -107,8 +108,8 @@ class Star {
     this.options = options
     this.width = width
     this.height = height
-    this.x = getRandom(-width, width)
-    this.y = getRandom(-height, height)
+    this.x = getRandom(-width * 2, width * 2)
+    this.y = getRandom(-height * 4, height * 4)
     this.z = getRandom(width * 2, width * 4)
     this.pz = this.z
     this.px = this.x
@@ -120,14 +121,18 @@ class Star {
 
   display () {
     const { width, height, options, p } = this
-    var sx = p.map(this.x / this.z / 2, -1, 1, -width, width)
-    var sy = p.map(this.y / this.z / 2, -1, 1, -height, height)
+    const sx = p.map(this.x / this.z / 2, -1, 1, -width, width)
+    const sy = p.map(this.y / this.z / 2, -1, 1, -height, height)
 
-    var r = p.map(p.dist(sx, sy, this.px, this.py), 0, width * 3, options.minSize, options.maxSize)
+    const r = p.map(p.dist(sx, sy, this.px, this.py), 0, width * 2, options.minSize, options.maxSize)
 
-    const percent = p.norm(p.dist(sx, sy, 0, 0), 0, options.Range)
-    const from = p.color(options.Color1)
-    const to = p.color(options.Color2)
+    const n = p.map(options.Range, 0, 200, 0, width)
+
+    const percent = p.norm(p.dist(sx, sy, 0, 0), 0, n)
+    const color1 = hexToRgb(options.Color1)
+    const color2 = hexToRgb(options.Color2)
+    const from = p.color(color1.r, color1.g, color1.b, options.alpha1 * 2.55)
+    const to = p.color(color2.r, color2.g, color2.b, options.alpha2 * 2.55)
     const between = p.lerpColor(from, to, percent)
 
     p.stroke(between)

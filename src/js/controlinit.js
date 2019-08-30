@@ -3,9 +3,10 @@
  */
 
 import dat from '@o2team/ambient-dat.gui'
-import { O2_AMBIENT_MAIN } from './utils/const'
+import { O2_AMBIENT_MAIN, O2_AMBIENT_CONFIG } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName, getRandom, getRandomArr } from './utils/util'
+import configBlue from '../configs/configBlue'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
@@ -14,7 +15,7 @@ let controlInit = () => {
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
   class OtherConfig {
     constructor () {
-      this.backgroundColor = '#bddaf7'
+      this.backgroundColor = '#000'
       this.isPaly = true
       this.message = '星星发射器'
       this.play = () => {
@@ -55,10 +56,23 @@ let controlInit = () => {
       otherConfig.random = () => {
         this.randomData()
       }
-      const gui = new dat.GUI()
+      const gui = new dat.GUI({
+        preset: 'default',
+        load: {
+          remembered: {
+            default: {
+              '0': {...window[O2_AMBIENT_CONFIG]}
+            },
+            blue: {
+              '0': {...configBlue}
+            }
+          }
+        }
+      })
+      gui.remember(config)
       gui.add(otherConfig, 'message').name('配置面板')
       gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
-        Control.setBackgroundColor(val)
+        this.setBackgroundColor(val)
       })
       // gui.add(otherConfig, 'play').name('播放 / 暂停')
       gui.add(otherConfig, 'random').name('随机配置')
@@ -74,9 +88,17 @@ let controlInit = () => {
         .addColor(this.config, 'Color1')
         .name('靠近中心')
         .onChange(this.resetCanvas.bind(this))
+      this.controls['alpha1'] = this.colorFolder
+        .add(this.config, 'alpha1', 0, 100)
+        .name('靠近中心透明度')
+        .onChange(this.resetCanvas.bind(this))
       this.controls['Color2'] = this.colorFolder
         .addColor(this.config, 'Color2')
         .name('靠近外围')
+        .onChange(this.resetCanvas.bind(this))
+      this.controls['alpha2'] = this.colorFolder
+        .add(this.config, 'alpha2', 0, 100)
+        .name('靠近外围透明度')
         .onChange(this.resetCanvas.bind(this))
       this.controls['Range'] = this.colorFolder
         .add(this.config, 'Range', 100, 1000)
