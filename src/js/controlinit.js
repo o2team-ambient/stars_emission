@@ -6,7 +6,7 @@ import dat from '@o2team/ambient-dat.gui'
 import { O2_AMBIENT_MAIN, O2_AMBIENT_CONFIG } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName, getRandom, getRandomArr } from './utils/util'
-import configBlue from '../configs/configBlue'
+import configBlue from './configs/configBlue'
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')

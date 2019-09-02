@@ -1,4 +1,4 @@
-import { O2_AMBIENT_CONFIG } from '../js/utils/const'
+import { O2_AMBIENT_CONFIG } from '../utils/const'
 
 export default {
   ...window[O2_AMBIENT_CONFIG],
